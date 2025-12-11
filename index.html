@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <title>SOCIETE GENERALE - Espace client en ligne</title>
+  <title>Ma Banque - Espace client en ligne</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <style>
@@ -616,7 +616,7 @@
           Retrouvez vos comptes, cartes bancaires et virements en ligne,
           dans une des banques.
           <br><br>
-          
+         
         </p>
       </div>
 
@@ -662,7 +662,7 @@
         <div class="card">
           <div class="card-title">
             <span>Compte bancaire courant</span>
-            <span>IBAN : FR76 3000 4312 2358 3348 2399 123</span>
+            <span>IBAN  : FR76 3000 4312 2358 3348 2399 123</span>
           </div>
 
           <div class="alert-suspended">
@@ -755,7 +755,7 @@
           </p>
 
           <p style="font-size:13px;color:var(--text-light);">
-            
+      
           </p>
         </div>
       </section>
@@ -800,15 +800,15 @@
 
           <div id="liste-virements">
             <div class="history-item">
-              <span>01/03/2017 – LOYER STUDIO</span>
+              <span>01/03/2025 – LOYER STUDIO</span>
               <span class="negative">- 450,00 €</span>
             </div>
             <div class="history-item">
-              <span>25/02/2017 – ÉPARGNE PERSO</span>
+              <span>25/02/2025 – ÉPARGNE PERSO</span>
               <span class="negative">- 100,00 €</span>
             </div>
             <div class="history-item">
-              <span>18/02/2017 – RACHID KONÉ</span>
+              <span>18/02/2025 – RACHID KONÉ</span>
               <span class="negative">- 35,00 €</span>
             </div>
           </div>
@@ -904,6 +904,34 @@
             Compte ouvert le <strong>12/04/2011</strong>.
           </p>
 
+          <div class="transaction-list">
+            <!-- Opérations récentes -->
+            <div class="transaction-row">
+              <div>
+                <div class="transaction-main">SALAIRE DEV SOLUTIONS</div>
+                <div class="transaction-sub">28/02/2025 · Virement</div>
+              </div>
+              <div class="transaction-amount positive">+ 1 200,00 €</div>
+            </div>
+
+            <div class="transaction-row">
+              <div>
+                <div class="transaction-main">LOYER STUDIO</div>
+                <div class="transaction-sub">01/03/2025 · Virement permanent</div>
+              </div>
+              <div class="transaction-amount negative">- 450,00 €</div>
+            </div>
+
+            <div class="transaction-row">
+              <div>
+                <div class="transaction-main">CB SUPERMARCHÉ MIXSHOP</div>
+                <div class="transaction-sub">26/02/2025 · Carte</div>
+              </div>
+              <div class="transaction-amount negative">- 62,30 €</div>
+            </div>
+
+            <!-- Anciennes opérations 2011 -->
+            <
           <div class="transaction-list">
             <!-- Opérations récentes -->
             <div class="transaction-row">
@@ -1010,9 +1038,7 @@
           </div>
 
           <p style="font-size:13px;color:var(--text-light);">
-            Dans une vraie application bancaire, cette zone permettrait de filtrer
-            les opérations par date, type de mouvement ou montant. Ici, elle est
-            simplement illustrative pour le devoir.
+          .
           </p>
         </div>
       </section>
@@ -1027,7 +1053,7 @@
         </div>
         <p style="font-size:13px;margin-bottom:10px;">
           Pour toute question concernant votre espace client, vos virements ou votre carte,
-          vous pouvez contacter  :
+          vous pouvez contacter :
         </p>
         <p style="font-size:13px;margin-bottom:4px;">
           <strong>Téléphone :</strong> +33 1 23 45 67 89
@@ -1051,10 +1077,14 @@
           de virement</strong>.
         </p>
         <p style="font-size:13px;margin-bottom:8px;">
-         
+          Dans cette maquette, le compte est volontairement marqué comme
+          <strong>temporairement suspendu</strong> suite à une activité suspecte.
+          C’est un exemple de mesure de sécurité utilisée par les banques pour
+          protéger les clients.
         </p>
         <p style="font-size:13px;color:var(--text-light);">
-          
+          Rappel : aucune donnée réelle n’est traitée. Ce site est un projet scolaire
+          qui imite visuellement un espace bancaire sans effectuer de vraies opérations.
         </p>
       </div>
     </section>
@@ -1077,6 +1107,11 @@
   <script>
     let isLoggedIn = false;
 
+    // éléments communs
+    const overlayVirement = document.getElementById("overlay-virement");
+    const btnCloseAlert = document.getElementById("btn-close-alert");
+    const messageVirement = document.getElementById("message-virement");
+
     // ===== CHANGEMENT LOGIN -> TABLEAU DE BORD =====
     const btnLogin = document.getElementById("btn-login");
     const btnLogout = document.getElementById("btn-logout");
@@ -1088,12 +1123,14 @@
     const linkAide = document.getElementById("link-aide");
 
     btnLogin.addEventListener("click", () => {
-      // pas de vrai contrôle, on affiche juste le tableau de bord
       isLoggedIn = true;
       document.body.classList.remove("mode-login");
       pageLogin.style.display = "none";
       pageDashboard.style.display = "block";
       pageAide.style.display = "none";
+
+      // 👉 Afficher l’alerte dès la connexion
+      overlayVirement.style.display = "flex";
     });
 
     btnLogout.addEventListener("click", () => {
@@ -1107,12 +1144,10 @@
     // Lien "Espace client" dans le header
     linkEspace.addEventListener("click", () => {
       if (isLoggedIn) {
-        // Retour au tableau de bord
         document.body.classList.remove("mode-login");
         pageLogin.style.display = "none";
         pageDashboard.style.display = "block";
       } else {
-        // Retour au formulaire de connexion
         document.body.classList.add("mode-login");
         pageLogin.style.display = "flex";
         pageDashboard.style.display = "none";
@@ -1141,11 +1176,9 @@
       item.addEventListener("click", () => {
         const target = item.getAttribute("data-section");
 
-        // active menu
         subnavItems.forEach((elt) => elt.classList.remove("active"));
         item.classList.add("active");
 
-        // affiche la bonne section
         Object.values(sections).forEach((s) => (s.style.display = "none"));
         sections[target].style.display = "grid";
       });
@@ -1153,15 +1186,9 @@
 
     // ===== MESSAGE D'ALERTE VIREMENT BLOQUÉ =====
     const btnVirement = document.getElementById("btn-envoyer-virement");
-    const messageVirement = document.getElementById("message-virement");
-    const overlayVirement = document.getElementById("overlay-virement");
-    const btnCloseAlert = document.getElementById("btn-close-alert");
 
     btnVirement.addEventListener("click", () => {
-      // Affiche le popup plein écran
       overlayVirement.style.display = "flex";
-
-      // Affiche aussi un petit message rouge sous le bouton (optionnel mais réaliste)
       messageVirement.style.display = "block";
       messageVirement.textContent =
         "Opération refusée : votre compte est temporairement suspendu, aucun virement ne peut être exécuté.";
@@ -1173,4 +1200,3 @@
   </script>
 </body>
 </html>
-
